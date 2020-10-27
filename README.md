@@ -56,9 +56,9 @@
 
 ![image-20201027152207139](README.assets/image-20201027152207139.png)
 
-添加"**agentAddress udp:161**"配置项,如下图所示:
+修改如下:
 
-![image-20201027152712408](README.assets/image-20201027152712408.png)
+![image-20201027171632220](README.assets/image-20201027171632220.png)
 
 #### 选择v2c SNMP协议的版本
 
