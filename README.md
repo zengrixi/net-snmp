@@ -22,11 +22,13 @@
 
 执行命令`./configure --prefix=/usr/local/snmp --with-mib-modules='ucd-snmp/diskio ip-mib/ipv4InterfaceTable'`后<strong style="color:rgb(0, 191, 166);">全部回车默认</strong>.
 
+![image-20201027211408183](README.assets/image-20201027211408183.png)
+
 如果<strong style="color:red;">失败</strong>可能是未安装编译套件,使用`sudo apt install build-essential`.
 
 ### 编译和安装
 
-执行`make && make install`命令进行编译安装.
+执行`sudo make && sudo make install`命令进行编译安装.
 
 如果编译<strong style="color:red;">失败</strong>可以尝试安装依赖包解决`sudo apt-get install libperl-dev`.
 
@@ -90,16 +92,18 @@
 
 获取本机的系统名字,使用命令:`snmpget -v 2c -c public localhost sysName.0`或者`snmpget -v 2c -c public 本机的ip地址 sysName.0`或者`snmpget -v 2c -c public 本机的ip地址 .1.3.6.1.2.1.1.5.0`进行测试.
 
-　　执行以下的几个命令都可以获取到本机的系统名字:
+执行以下的几个命令都可以获取到本机的系统名字:
 
-　　　　snmpget -v 2c -c public localhost sysName.0
-　　　　snmpget -v 2c -c public 127.0.0.1 sysName.0
-　　　　snmpget -v 2c -c public 192.168.1.229 sysName.0
-　　　　snmpget -v 2c -c public localhost .1.3.6.1.2.1.1.5.0
-　　　　snmpget -v 2c -c public 127.0.0.1 .1.3.6.1.2.1.1.5.0
-　　　　snmpget -v 2c -c public 192.168.1.229 .1.3.6.1.2.1.1.5.0
+```bash
+snmpget -v 2c -c public localhost sysName.0
+snmpget -v 2c -c public 127.0.0.1 sysName.0
+snmpget -v 2c -c public 192.168.1.229 sysName.0
+snmpget -v 2c -c public localhost .1.3.6.1.2.1.1.5.0
+snmpget -v 2c -c public 127.0.0.1 .1.3.6.1.2.1.1.5.0
+snmpget -v 2c -c public 192.168.1.229 .1.3.6.1.2.1.1.5.0
+```
 
-　　如下图所示:
+如下图所示:
 
 ![image-20201027124745267](README.assets/image-20201027124745267.png)
 
@@ -109,9 +113,9 @@
 
 ![image-20201027133458061](README.assets/image-20201027133458061.png)
 
-可以看到，目前iptables防火墙并没有对外开放udp 161端口的访问权限,也就是说,此时外面的计算机是无法访问Linux下的SNMP服务的,可以使用`sudo iptables -I INPUT -p udp --dport 161 -j ACCEPT`命令添加UDP 161端口到iptables防火墙中,然后执行`sudo iptables-save`命令保存防火墙的更改,如下图所示:
+可以看到，目前iptables防火墙并没有对外开放udp 161端口的访问权限,也就是说,此时外面的计算机是无法访问Linux下的SNMP服务的,可以使用`sudo ufw allow 161`命令<strong style="color:#126bae;">打开161端口</strong>如下图所示:
 
-![image-20201027133638491](README.assets/image-20201027133638491.png)
+![image-20201027222529462](README.assets/image-20201027222529462.png)
 
 # Win10开启SNMP服务
 
